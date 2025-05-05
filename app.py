@@ -31,7 +31,6 @@ def github_webhook():
             subprocess.run([
                 "ssh",
                 "-o", "StrictHostKeyChecking=no",
-                "-i", "/root/.ssh/id_ed25519",
                 SSH_TARGET,
                 cleanup_script
             ], check=True)
