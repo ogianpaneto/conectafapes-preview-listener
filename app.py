@@ -13,7 +13,7 @@ if not SSH_TARGET or not SCRIPT_PATH:
     if not SSH_TARGET:
         print("  - SSH_TARGET")
     if not SCRIPT_PATH:
-        print("  - CLEANUP_SCRIPT_PATH")
+        print("  - SCRIPT_PATH")
     sys.exit(1)
 
 @app.route('/webhook', methods=['POST'])
