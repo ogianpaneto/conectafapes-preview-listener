@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 SSH_TARGET = os.environ.get("SSH_TARGET")
 SCRIPT_PATH = os.environ.get("SCRIPT_PATH")
-SSH_KEY_PATH = os.environ.get("SSH_KEY_PATH")
+SSH_KEY_PATH = os.expanduser(os.environ.get("SSH_KEY_PATH"))
 
 if not SSH_TARGET or not SCRIPT_PATH or not SSH_KEY_PATH:
     print("[ERROR] Missing required environment variables:")
