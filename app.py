@@ -7,13 +7,16 @@ app = Flask(__name__)
 
 SSH_TARGET = os.environ.get("SSH_TARGET")
 SCRIPT_PATH = os.environ.get("SCRIPT_PATH")
+SSH_KEY_PATH = os.environ.get("SSH_KEY_PATH")
 
-if not SSH_TARGET or not SCRIPT_PATH:
+if not SSH_TARGET or not SCRIPT_PATH or not SSH_KEY_PATH:
     print("[ERROR] Missing required environment variables:")
     if not SSH_TARGET:
         print("  - SSH_TARGET")
     if not SCRIPT_PATH:
         print("  - SCRIPT_PATH")
+    if not SSH_KEY_PATH:
+        print(" - SSH_KEY_PATH")
     sys.exit(1)
 
 @app.route('/webhook', methods=['POST'])
@@ -31,6 +34,7 @@ def github_webhook():
             subprocess.run([
                 "ssh",
                 "-o", "StrictHostKeyChecking=no",
+                "-i", SSH_KEY_PATH,
                 SSH_TARGET,
                 cleanup_script
             ], check=True)
